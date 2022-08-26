@@ -1,9 +1,32 @@
 const express = require('express')
 const app = express()
+const dotenv = require('dotenv')
+const connectDB = require('./config/db')
+const bodyParser = require("body-parser");
+var userRoutes = require('./routes/user')
+var adminRoutes = require('./routes/admin')
+const {notFound, errorHandler} = require('./middlewares/errorMiddleware')
 
-app.get("/",(req,res)=>{
-    res.send("hello jjworld")
+//dotenv
+dotenv.config();
 
-})
+//mongoose connection
+connectDB()
 
-app.listen(5000,console.log("listening on 5000"))
+//body parsers
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+//root routes
+app.use("/", userRoutes);
+app.use("/admin", adminRoutes);
+
+//error handling middlewares
+app.use(notFound);
+app.use(errorHandler);
+
+//connection port
+let PORT = process.env.PORT || 5000;
+
+
+app.listen(PORT, console.log(`server started on port ${PORT}`));
