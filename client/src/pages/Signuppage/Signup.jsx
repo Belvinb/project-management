@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,19 +14,32 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
-
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../features/user/userActions";
 
 const Signup = () => {
+  const { loading, error, success } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   const theme = createTheme();
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm();
-    const onSubmit = (data) => {
-      console.log(data)
-    
-    }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+   const navigate = useNavigate();
+   useEffect(() => {
+    if(success) navigate("/login");
+  
+   }, [navigate,success])
+   
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(registerUser(data));
+  };
   return (
     <div
       className="loginbackground"
@@ -54,6 +67,7 @@ const Signup = () => {
             {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar> */}
+            <AccountCircleIcon sx={{ fontSize: "2.4rem" }} />
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
@@ -126,6 +140,7 @@ const Signup = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                disabled={loading}
               >
                 Sign In
               </Button>
@@ -142,6 +157,6 @@ const Signup = () => {
       </ThemeProvider>
     </div>
   );
-}
+};
 
-export default Signup
+export default Signup;

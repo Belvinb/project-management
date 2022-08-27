@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const dotenv = require('dotenv')
 const connectDB = require('./config/db')
+const cors = require("cors");
 const bodyParser = require("body-parser");
 var userRoutes = require('./routes/user')
 var adminRoutes = require('./routes/admin')
@@ -16,6 +17,8 @@ connectDB()
 //body parsers
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(cors({ origin: true, credentials: true }));
 
 //root routes
 app.use("/", userRoutes);
