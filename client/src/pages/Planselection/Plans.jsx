@@ -14,6 +14,8 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import Container from "@mui/material/Container";
+import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
 
 
 const tiers = [
@@ -57,6 +59,92 @@ const tiers = [
 ];
 
 const Plans = () => {
+
+   const navigate = useNavigate();
+
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  async function displayRazorpay() {
+    try {
+      const res = await loadScript(
+        "https://checkout.razorpay.com/v1/checkout.js"
+      );
+
+      if (!res) {
+        alert("Razorpay SDK failed to load. Are you online?");
+        return;
+      }
+      console.log("sdfdsf")
+      const result = await axios.post("http://127.0.0.1:5000/subscription");
+
+      console.log(result)
+
+      if (!result) {
+        alert("Server error. Are you online?");
+        return;
+      }
+
+      const {id} = result.data;
+     
+
+      // const {amount} = result.data.
+      
+
+      const options = {
+        key: "rzp_test_MkOPieSMPDcB0n",
+        subscription_id: id,
+        amount:"500",
+        name: "Aventur",
+        description: "Monthly subscription plans",
+        image: "",
+        handler: async function (response) {
+          console.log(response,"responsefdf")
+          const data = {
+            paymentId: response.razorpay_payment_id,
+            subscriptionId: response.razorpay_subscription_id,
+            signature: response.razorpay_signature,
+          };
+          const details = await axios.post("http://127.0.0.1:5000/subSuccess",data)
+          if(details){
+            navigate("/login")
+          }
+          
+        },
+        prefill: {
+          name: "Aventure ",
+          email: "contact.aventure@aventure.com",
+          contact: "+919876543210",
+        },
+        notes: {
+          note_key_1: "Tea. Earl Grey. Hot",
+          note_key_2: "Make it so.",
+        },
+        theme: {
+          color: "#F37254",
+        },
+      };
+
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+      
+    } catch (error) {
+      console.log(error,"rrrrr")
+    }
+    
+  }
+
   return (
     <React.Fragment>
       <GlobalStyles
@@ -109,9 +197,8 @@ const Plans = () => {
                     align: "center",
                   }}
                   sx={{
-                    backgroundColor:
-                      "#44A08D",
-                    color:"white"
+                    backgroundColor: "#44A08D",
+                    color: "white",
                   }}
                 />
                 <CardContent>
@@ -148,7 +235,11 @@ const Plans = () => {
                   </ul>
                 </CardContent>
                 <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant}>
+                  <Button
+                    fullWidth
+                    variant={tier.buttonVariant}
+                    onClick={displayRazorpay}
+                  >
                     {tier.buttonText}
                   </Button>
                 </CardActions>

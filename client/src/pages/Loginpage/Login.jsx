@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Login.css'
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -14,10 +14,38 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { userLogin } from "../../features/user/userActions";
+
 
 
 const Login = () => {
   const theme = createTheme();
+  const { loading, error,userInfo } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const navigate = useNavigate();
+
+    useEffect(() => {
+      if (userInfo) {
+        navigate("/home");
+      }
+    }, [navigate, userInfo]);
+
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(userLogin(data))
+  };
+
+
   return (
     <div
       className="loginbackground"
@@ -48,7 +76,7 @@ const Login = () => {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" onSubmit="" noValidate sx={{ mt: 1 }}>
+            <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -58,7 +86,11 @@ const Login = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                {...register("email", { required: "true" })}
               />
+              {errors.email && (
+                <p style={{ color: "red" }}>Please enter your email</p>
+              )}
               <TextField
                 margin="normal"
                 required
@@ -68,7 +100,11 @@ const Login = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                {...register("password", { required: "true" })}
               />
+              {errors.password && (
+                <p style={{ color: "red" }}>Please enter your password</p>
+              )}
 
               <Button
                 type="submit"
