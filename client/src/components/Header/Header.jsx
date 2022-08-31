@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,12 +14,27 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import FontDownloadIcon from "@mui/icons-material/FontDownload";
 import  './Header.css'
-import {Outlet} from 'react-router-dom'
+import {logout} from '../../features/user/userSlice'
+import {Outlet, useNavigate} from 'react-router-dom'
+import {useDispatch, useSelector } from "react-redux";
+
 
 const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = [ "Logout"];
 
 const Header = () => {
+
+  const {userInfo,userToken} = useSelector((state)=>state.user)
+  console.log(userInfo,"infooo")
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  // useEffect(() => {
+  //   if (!userInfo) {
+  //     navigate("/login");
+  //   }
+  // }, [userInfo, navigate]);
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -37,7 +52,10 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  const handleLogout = ()=>{
+    dispatch(logout())
+    navigate("/login")
+  }
   return (
     <>
       <AppBar
@@ -135,13 +153,14 @@ const Header = () => {
                 </Button>
               ))}
             </Box>
-
+            {userToken?
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
+              
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
@@ -160,11 +179,11 @@ const Header = () => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography textAlign="center" onClick={handleLogout}>{setting} </Typography>
                   </MenuItem>
                 ))}
               </Menu>
-            </Box>
+            </Box>:""}
           </Toolbar>
         </Container>
       </AppBar>

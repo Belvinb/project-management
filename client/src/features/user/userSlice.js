@@ -1,10 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit'
+import { useDispatch } from 'react-redux'
 import { registerUser,userLogin } from './userActions'
 
 // initialize userToken from local storage
 const userToken = localStorage.getItem('userToken')
   ? localStorage.getItem('userToken')
   : null
+
+
 
 const initialState = {
     loading:false,
@@ -17,7 +20,15 @@ const initialState = {
 const userSlice = createSlice({
     name : 'user',
     initialState,
-    reducers : {},
+    reducers : {
+        logout :(state)=>{
+            localStorage.removeItem('userToken')
+            state.loading = false
+            state.userInfo = null
+            state.userToken = null
+            state.error = null
+        }
+    },
     extraReducers : {
         [userLogin.pending]:(state)=>{
             state.loading = true
@@ -47,5 +58,5 @@ const userSlice = createSlice({
     }
 
 })
-
+export const { logout } = userSlice.actions;
 export default userSlice.reducer

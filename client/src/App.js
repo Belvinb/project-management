@@ -14,14 +14,14 @@ function App() {
     <Suspense fallback={<Loader />}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Landingpage />} />
           <Route element={<Header />}>
+            <Route path="/" element={<Landingpage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route element={<ProtectedRoute />}>
-              <Route path="/plans" element={<Plans />} />
               <Route path="/home" element={<Home />} />
             </Route>
+            <Route path="/plans" element={<Plans />} />
           </Route>
         </Routes>
       </BrowserRouter>

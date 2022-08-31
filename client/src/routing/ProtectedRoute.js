@@ -4,12 +4,10 @@ import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const ProtectedRoute = () => {
-  const { userInfo } = useSelector((state) => state.user);
+  const { userToken } = useSelector((state) => state.user);
     const navigate = useNavigate();
-  if (!userInfo) {
-    return (
-     navigate("/login")
-    );
+  if (!userToken) {
+    return <h2>unauthorized</h2>;
   }
 
   // returns child route elements

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -14,9 +14,8 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import Container from "@mui/material/Container";
-import axios from 'axios'
-import {useNavigate} from 'react-router-dom'
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const tiers = [
   {
@@ -58,9 +57,9 @@ const tiers = [
   },
 ];
 
-const Plans = () => {
 
-   const navigate = useNavigate();
+const Plans = () => {
+  const navigate = useNavigate();
 
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -75,8 +74,17 @@ const Plans = () => {
       document.body.appendChild(script);
     });
   }
+  
+  const handleClick = (title)=>{
+    if(title==="Free"){
+      navigate("/login")
+    }else{
+      displayRazorpay()
+    }
+  }
 
   async function displayRazorpay() {
+    
     try {
       const res = await loadScript(
         "https://checkout.razorpay.com/v1/checkout.js"
@@ -86,41 +94,41 @@ const Plans = () => {
         alert("Razorpay SDK failed to load. Are you online?");
         return;
       }
-      console.log("sdfdsf")
+      console.log("sdfdsf");
       const result = await axios.post("http://127.0.0.1:5000/subscription");
 
-      console.log(result)
+      console.log(result);
 
       if (!result) {
         alert("Server error. Are you online?");
         return;
       }
 
-      const {id} = result.data;
-     
+      const { id } = result.data;
 
       // const {amount} = result.data.
-      
 
       const options = {
         key: "rzp_test_MkOPieSMPDcB0n",
         subscription_id: id,
-        amount:"500",
+        amount: "500",
         name: "Aventur",
         description: "Monthly subscription plans",
         image: "",
         handler: async function (response) {
-          console.log(response,"responsefdf")
+          console.log(response, "responsefdf");
           const data = {
             paymentId: response.razorpay_payment_id,
             subscriptionId: response.razorpay_subscription_id,
             signature: response.razorpay_signature,
           };
-          const details = await axios.post("http://127.0.0.1:5000/subSuccess",data)
-          if(details){
-            navigate("/login")
+          const details = await axios.post(
+            "http://127.0.0.1:5000/subSuccess",
+            data
+          );
+          if (details) {
+            navigate("/login");
           }
-          
         },
         prefill: {
           name: "Aventure ",
@@ -138,13 +146,12 @@ const Plans = () => {
 
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
-      
     } catch (error) {
-      console.log(error,"rrrrr")
+      console.log(error, "rrrrr");
     }
-    
   }
-
+  
+ 
   return (
     <React.Fragment>
       <GlobalStyles
@@ -238,7 +245,8 @@ const Plans = () => {
                   <Button
                     fullWidth
                     variant={tier.buttonVariant}
-                    onClick={displayRazorpay}
+                    // // onClick={displayRazorpay}
+                    onClick={()=>handleClick(tier.title)}
                   >
                     {tier.buttonText}
                   </Button>
@@ -250,6 +258,6 @@ const Plans = () => {
       </Container>
     </React.Fragment>
   );
-}
+};
 
-export default Plans
+export default Plans;
