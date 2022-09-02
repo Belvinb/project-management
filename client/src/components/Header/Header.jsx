@@ -25,15 +25,14 @@ const settings = [ "Logout"];
 const Header = () => {
 
   const {userInfo,userToken} = useSelector((state)=>state.user)
-  console.log(userInfo,"infooo")
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   // useEffect(() => {
-  //   if (!userInfo) {
+  //   if (!userToken) {
   //     navigate("/login");
   //   }
-  // }, [userInfo, navigate]);
+  // }, [userToken]);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -58,14 +57,12 @@ const Header = () => {
   }
   return (
     <>
-      <AppBar
-        position="static"
-        style={{ backgroundImage: "linear-gradient(to right,#44A08D,#093637)" }}
-      >
-        <Container>
+      <AppBar position="static" style={{ backgroundColor: "white",height:"5.5rem",paddingLeft:"2rem" }}>
+        
           <Toolbar disableGutters>
             <FontDownloadIcon
               sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+              style={{ color: "black" }}
             />
             <Typography
               variant="h6"
@@ -78,7 +75,7 @@ const Header = () => {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "inherit",
+                color: "black",
                 textDecoration: "none",
               }}
             >
@@ -92,7 +89,7 @@ const Header = () => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
-                color="inherit"
+                style={{ color: "black" }}
               >
                 <MenuIcon />
               </IconButton>
@@ -116,13 +113,16 @@ const Header = () => {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                    <Typography style={{ color: "black" }} textAlign="center">
+                      {page}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>
             </Box>
             <FontDownloadIcon
               sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+              style={{ color: "black" }}
             />
             <Typography
               variant="h5"
@@ -136,7 +136,7 @@ const Header = () => {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "inherit",
+                color: "black",
                 textDecoration: "none",
               }}
             >
@@ -145,6 +145,7 @@ const Header = () => {
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
+                  style={{ color: "black" }}
                   key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
@@ -153,39 +154,51 @@ const Header = () => {
                 </Button>
               ))}
             </Box>
-            {userToken?
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-              
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center" onClick={handleLogout}>{setting} </Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>:""}
+            {userToken ? (
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="/static/images/avatar/2.jpg"
+                    />
+                  </IconButton>
+                </Tooltip>
+
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center" onClick={handleLogout}>
+                        {setting}{" "}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+            ) : (
+              <MenuItem key="" onClick="">
+                <Typography style={{ color: "black" }} textAlign="center">
+                  Login
+                </Typography>
+              </MenuItem>
+            )}
           </Toolbar>
-        </Container>
+        
       </AppBar>
       <div className="row">
         <div>

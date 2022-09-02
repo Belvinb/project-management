@@ -2,10 +2,15 @@ const asyncHandler = require('express-async-handler')
 const {User} = require('../models/userModel')
 const generateToken = require('../utils/generateToken')
 const Razorpay = require("razorpay");
- const instance = new Razorpay({
-   key_id: "rzp_test_MkOPieSMPDcB0n",
-   key_secret: "fS78jjk0hq9pgZfnX8D3dAyz",
- });
+const dotenv = require("dotenv");
+dotenv.config();
+
+const instance = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_SECRET,
+});
+
+
 
 
 const registerUser = asyncHandler(async(req,res)=>{
@@ -92,7 +97,7 @@ const subSuccess = asyncHandler(async(req,res)=>{
     const crypto = require('crypto')
     
     const { paymentId, subscriptionId, signature } = req.body;
-     let hmac = crypto.createHmac("sha256", "fS78jjk0hq9pgZfnX8D3dAyz");
+     let hmac = crypto.createHmac("sha256", process.env.RAZORPAY_SECRET);
      hmac.update(paymentId + "|" + subscriptionId);
      hmac = hmac.digest("hex");
      if (hmac == signature) {
