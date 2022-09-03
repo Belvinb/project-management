@@ -1,15 +1,158 @@
-.imageOne{
-    background-color:#e9ecef;
-
+.imageOne {
+  background-color: #e9ecef;
+  height:380px
 }
 
-/* .titleImage{
+@media only screen and (max-width: 600px) {
+  .Title {
+    color: #03045e;
+    padding-left: 2rem;
+    font-family: monospace;
+    font-size: 31px;
+  }
+}
 
-} */
+@media only screen and (min-width: 600px) {
+  .Title {
+    color: #03045e;
+    padding-left: 2.5rem;
+    font-family: monospace;
+    font-size: 25px;
+  }
+}
 
-/* @media only screen and (min-width: 400px){
-    .titleImage{
-        height: 60vh ;
-        width: 60vw;
-    }
-} */
+@media only screen and (min-width: 768px) {
+  .Title {
+    color: #03045e;
+    padding-left: 2.5rem;
+    font-family: monospace;
+    font-size: 25px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .Title {
+    color: #03045e;
+    padding-left: 2.5rem;
+    padding-top: 3rem;
+    font-family: monospace;
+    font-size: 28px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .Title {
+    color: #03045e;
+    padding-left: 7rem;
+    padding-top: 5.2rem;
+    font-family: monospace;
+    font-size: 32px;
+  }
+}
+
+/* subtitle */
+@media only screen and (max-width: 600px) {
+  .SubTitle {
+    color: #343436;
+    padding-left: 2rem;
+    padding-top: 1.4rem;
+    font-family: monospace;
+    font-size: 9px;
+    
+  }
+}
+
+
+@media only screen and (min-width: 600px) {
+  .SubTitle {
+    color: #343436;
+    padding-left: 2.8rem;
+    padding-top: 1.8rem;
+    font-family: monospace;
+    
+  }
+}
+
+@media only screen and (min-width:  768px) {
+  .SubTitle {
+    color: #343436;
+    padding-left: 2.8rem;
+    padding-top: 1.8rem;
+    font-family: monospace;
+    
+  }
+}
+
+@media only screen and (min-width:  992px) {
+  .SubTitle {
+    color: #343436;
+    padding-left: 2.8rem;
+    padding-top: 1.8rem;
+    font-family: monospace;
+    
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .SubTitle {
+    color: #343436;
+    padding-left: 7rem;
+    padding-top: 1.8rem;
+    font-family: monospace;
+    
+  }
+}
+
+
+/* title image */
+
+@media only screen and (max-width: 600px) {
+  .titleImage {
+    height: 200px;
+    width: 280px;
+    padding-left: 2.2rem;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .titleImage {
+    height: 200px;
+    width: 300px;
+    padding-left: 0;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .titleImage {
+    height: 200px;
+    width: 300px;
+    padding-left: 0;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .titleImage {
+    height: 200px;
+    width: 350px;
+    padding-left: 0;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .titleImage {
+    height: 350px;
+    width: 420px;
+    padding-left: 0;
+  }
+}
+
+
+/* features */
+
+.featuretitle{
+    position: absolute;
+    left: 50%;
+    margin-top: 2.8rem;
+    transform: translate(-50%, -50%);
+    font-family: monospace;
+}
