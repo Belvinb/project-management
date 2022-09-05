@@ -17,6 +17,7 @@ import  './Header.css'
 import {logout} from '../../features/user/userSlice'
 import {Outlet, useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector } from "react-redux";
+import {getUserDetails} from "../../features/user/userActions"
 
 
 const pages = ["Products", "Pricing", "Blog"];
@@ -25,14 +26,15 @@ const settings = [ "Logout"];
 const Header = () => {
 
   const {userInfo,userToken} = useSelector((state)=>state.user)
+  
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // useEffect(() => {
-  //   if (!userToken) {
-  //     navigate("/login");
-  //   }
-  // }, [userToken]);
+  useEffect(() => {
+    if (userToken) {
+      dispatch(getUserDetails());
+    }
+  }, [userToken, dispatch]);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -57,7 +59,7 @@ const Header = () => {
   }
   return (
     <>
-      <AppBar position="static" style={{ backgroundColor: "white",height:"5.5rem",paddingLeft:"2rem" }}>
+      <AppBar position="static" style={{ backgroundColor: "white",height:"5rem",paddingLeft:"2rem" }}>
         
           <Toolbar disableGutters>
             <FontDownloadIcon
@@ -154,14 +156,11 @@ const Header = () => {
                 </Button>
               ))}
             </Box>
-            {userToken ? (
+            {userToken ? 
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
-                    />
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 ,mr:2}}>
+                    <h4>user</h4>
                   </IconButton>
                 </Tooltip>
 
@@ -190,13 +189,12 @@ const Header = () => {
                   ))}
                 </Menu>
               </Box>
-            ) : (
+              :
               <MenuItem key="" onClick="">
                 <Typography style={{ color: "black" }} textAlign="center">
                   Login
                 </Typography>
-              </MenuItem>
-            )}
+              </MenuItem>}
           </Toolbar>
         
       </AppBar>

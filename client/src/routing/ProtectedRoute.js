@@ -7,7 +7,16 @@ const ProtectedRoute = () => {
   const { userToken } = useSelector((state) => state.user);
     const navigate = useNavigate();
   if (!userToken) {
-    return <h2>unauthorized</h2>;
+    return (
+      <div
+       
+        
+        justifyContent="center"
+        alignItems="center"
+      >
+        <h1>Please login to view this page</h1>
+      </div>
+    );
   }
 
   // returns child route elements

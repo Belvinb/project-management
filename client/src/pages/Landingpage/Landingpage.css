@@ -1,6 +1,7 @@
 .imageOne {
   background-color: #e9ecef;
-  height:380px
+  min-height: 380px;
+  height: auto;
 }
 
 @media only screen and (max-width: 600px) {
@@ -58,10 +59,8 @@
     padding-top: 1.4rem;
     font-family: monospace;
     font-size: 9px;
-    
   }
 }
-
 
 @media only screen and (min-width: 600px) {
   .SubTitle {
@@ -69,27 +68,24 @@
     padding-left: 2.8rem;
     padding-top: 1.8rem;
     font-family: monospace;
-    
   }
 }
 
-@media only screen and (min-width:  768px) {
+@media only screen and (min-width: 768px) {
   .SubTitle {
     color: #343436;
     padding-left: 2.8rem;
     padding-top: 1.8rem;
     font-family: monospace;
-    
   }
 }
 
-@media only screen and (min-width:  992px) {
+@media only screen and (min-width: 992px) {
   .SubTitle {
     color: #343436;
     padding-left: 2.8rem;
     padding-top: 1.8rem;
     font-family: monospace;
-    
   }
 }
 
@@ -99,10 +95,8 @@
     padding-left: 7rem;
     padding-top: 1.8rem;
     font-family: monospace;
-    
   }
 }
-
 
 /* title image */
 
@@ -110,7 +104,7 @@
   .titleImage {
     height: 200px;
     width: 280px;
-    padding-left: 2.2rem;
+    padding-left: 1rem;
   }
 }
 
@@ -133,26 +127,58 @@
 @media only screen and (min-width: 992px) {
   .titleImage {
     height: 200px;
-    width: 350px;
+    width: 320px;
     padding-left: 0;
   }
 }
 
 @media only screen and (min-width: 1200px) {
   .titleImage {
-    height: 350px;
-    width: 420px;
+    height: 320px;
+    width: 400px;
     padding-left: 0;
   }
 }
 
-
 /* features */
 
-.featuretitle{
-    position: absolute;
-    left: 50%;
-    margin-top: 2.8rem;
-    transform: translate(-50%, -50%);
-    font-family: monospace;
+.featuretitle {
+  position: absolute;
+  left: 50%;
+  margin-top: 2.8rem;
+  transform: translate(-50%, -50%);
+  font-family: monospace;
+}
+
+/* get started */
+
+.getStarted {
+  background-color: #e9ecef;
+  min-height: 250px;
+  height: auto;
+  width: auto;
+  position: absolute;
+  left: 50%;
+  margin-top: 10rem;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 25px;
+}
+
+.startsec1 {
+  font-family: monospace;
+  font-size: 25px;
+}
+
+.startsec2 {
+  background-color: #ef233c;
+  border-radius: 0px 25px 25px 0px;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .startsec2 {
+  background-color: #ef233c;
+  border-radius: 0px 0px 0px 0px;
+}
 }

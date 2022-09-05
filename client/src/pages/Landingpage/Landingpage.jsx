@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { Button, CardActionArea } from "@mui/material";
 
 
 const features = [
@@ -50,7 +50,6 @@ const Landingpage = () => {
             className="titleImage"
             src={process.env.PUBLIC_URL + "images/title1.png"}
             alt=""
-            
           />
         </Grid>
       </Grid>
@@ -68,7 +67,7 @@ const Landingpage = () => {
             xs={12}
             sm={6}
             lg={3}
-            style={{ display: "flex", paddingLeft: "1.9rem" }}
+            style={{ display: "flex", paddingLeft: "2rem" }}
           >
             <Card
               sx={{ width: 295, height: 300, marginTop: "6rem" }}
@@ -92,8 +91,29 @@ const Landingpage = () => {
           </Grid>
         ))}
       </Grid>
-      <Grid container>
+      <Grid container className="getStarted" xs={12} md={10}>
+        <Grid
+          item
+          sm={12}
+          md={6}
+          className="startsec1"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <h3 style={{}}>
+            Create your first project <br /> with <br />
+            <span style={{ fontSize: "40px", marginTop: "2rem" }}>
+              <span style={{ color: "red" }}>A</span>VENTURE
+            </span>
+          </h3>
 
+          <Button style={{ backgroundColor: "#ef233c",marginTop:"2rem" }} size="large" variant="contained">
+            Let's Go
+          </Button>
+        </Grid>
+        <Grid item sm={12} md={6} className="startsec2"></Grid>
       </Grid>
     </>
   );

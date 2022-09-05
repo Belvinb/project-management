@@ -1,0 +1,22 @@
+.newProject {
+  height: auto;
+  min-height: 300px;
+  background-color: #74c69d;
+}
+
+.join {
+  height: 110px;
+  width: 150px;
+  margin-top: 1rem;
+}
+
+.projectTable {
+  position: absolute;
+  left: 50%;
+  margin-top: 2.8rem;
+  top: 45rem;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
+}
+
+

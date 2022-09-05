@@ -115,5 +115,20 @@ const subSuccess = asyncHandler(async(req,res)=>{
   }
 })
 
-module.exports = { registerUser, authUser, createSubscription, subSuccess };
+
+const getProfile = asyncHandler(async(req,res)=>{
+  try {
+    
+  } catch (error) {
+    
+  }
+})
+
+module.exports = {
+  registerUser,
+  authUser,
+  createSubscription,
+  subSuccess,
+  getProfile,
+};
 
