@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import "./Home.css";
 import Box from "@mui/material/Box";
@@ -8,81 +8,22 @@ import DataTable from "react-data-table-component";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import { useForm, Controller } from "react-hook-form";
-import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import Stack from "@mui/material/Stack";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import dayjs from "dayjs";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+import { createProject } from "../../features/project/projectActions";
+import api from "../../api/axiosConfig";
+import { useLocation, useNavigate } from "react-router-dom";
+var randomString = require("random-string");
 
-const columns = [
-  {
-    name: "Title",
-    selector: (row) => row.title,
-  },
-  {
-    name: "Year",
-    selector: (row) => row.year,
-  },
-  {
-    name: "Year",
-    selector: (row) => row.year,
-  },
-  {
-    name: "Year",
-    selector: (row) => row.year,
-  },
-  {
-    name: "Year",
-    selector: (row) => row.year,
-  },
-  {
-    name: "Year",
-    selector: (row) => row.year,
-  },
-  {
-    name: "Year",
-    selector: (row) => row.year,
-  },
-];
 
-const data = [
-  {
-    id: 1,
-    title: "Beetlejuice",
-    year: "1988",
-  },
-  {
-    id: 2,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-  {
-    id: 2,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-  {
-    id: 2,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-  {
-    id: 2,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-  {
-    id: 2,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-];
 
-// modal for create project
+// modal for create and join project
 const style = {
   position: "absolute",
   top: "50%",
@@ -90,12 +31,74 @@ const style = {
   margin: "auto",
   transform: "translate(-50%, -50%)",
   width: "auto",
+  
   bgcolor: "background.paper",
   border: "1px solid #000",
   boxShadow: 24,
 };
 
 const Home = () => {
+  let user = JSON.parse(localStorage.getItem("userToken"));
+  const [projects, setprojects] = useState([]);
+   const [refresh, setrefresh] = useState(false);
+
+  let location = useLocation();
+   const navigate = useNavigate();
+
+  useEffect(() => {
+    function myProjects() {
+      const myId = user._id;
+      console.log(myId,"user id details")
+      api.get(`/myCreatedProjects/${myId}`).then((response) => {
+        setprojects(response.data);
+      });
+    }
+    myProjects();
+  }, [location,refresh]);
+
+
+  const openProject = async (projectId) => {
+    try {
+      navigate(`/project/workflow/${projectId}`);
+    } catch (error) {
+      throw new error(error.response.data.message);
+    }
+  };
+
+  const columns = [
+    {
+      name: "Title",
+      selector: (row) => row.title,
+    },
+    {
+      name: "start-date",
+      selector: (row) => row.startDate,
+    },
+    {
+      name: "end-date",
+      selector: (row) => row.endDate,
+    },
+    {
+      name: "status",
+      selector: (row) => (row.createdBy === user._id ? "created" : "joined"),
+    },
+    {
+      name: "view details",
+      cell: (row) => (
+        <Button
+          style={{ backgroundColor: "black" }}
+          onClick={() => {
+            openProject(row._id);
+          }}
+        >
+          open
+        </Button>
+      ),
+    },
+  ];
+
+  const dispatch = useDispatch();
+
   //create project
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -106,10 +109,11 @@ const Home = () => {
   const handleJoinOpen = () => setOpenJoin(true);
   const handleJoinClose = () => setOpenJoin(false);
 
+  //project start and end date
+  const [startDate, setStartDate] = React.useState(dayjs());
+  const [endDate, setEndDate] = React.useState(dayjs());
 
-   const [startDate, setStartDate] = React.useState(dayjs());
-   const [endDate, setEndDate] = React.useState(dayjs());
-
+  //submit handler for create project
   const {
     control,
     register,
@@ -117,16 +121,55 @@ const Home = () => {
     formState: { errors },
   } = useForm();
 
-   const onSubmit = (data) => {
+  //submit handler for join project
+    const {
+      register : register2,
+      handleSubmit : handleSubmit2,
+      formState: { errors : errors2 },
+    } = useForm();
+
+
+    //handler for create project
+  const onSubmit = (data) => {
     let details = {
       title: data.title,
       description: data.description,
       startDate: moment(data.startDate).format("YYYY-MM-DD"),
       endDate: moment(data.endDate).format("YYYY-MM-DD"),
+      createdBy: user._id,
+      projectID: randomString({ length: 6 }),
     };
+    handleClose()
+    setrefresh(!refresh)
+
+    dispatch(createProject(details));
+  };
+
+  //handler for join project
+  const joinProject = async(data) =>{
+    const joinDetails = {
+      email : user.email,
+      projectCode: data.join,
+      userId : user._id
+    }
+    handleJoinClose()
+    setrefresh(!refresh)
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let { invite } = await api.post("/joinProject", joinDetails, config);
+      if(invite){
+        console.log(invite,"suceess")
+      }
+
+    } catch (error) {
+      
+    }
     
-     console.log(details);
-   };
+  }
 
   return (
     <>
@@ -220,7 +263,7 @@ const Home = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                create project
+                create
               </Button>
             </Grid>
           </Box>
@@ -234,10 +277,29 @@ const Home = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} xs={8}>
+        <Box sx={style} component="form" onSubmit={handleSubmit2(joinProject)}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            Enter invite code
           </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="join"
+              name="join"
+              autoFocus
+              {...register2("join", { shouldValidate: true })}
+            />
+          </Typography>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Invite
+          </Button>
         </Box>
       </Modal>
 
@@ -316,11 +378,11 @@ const Home = () => {
 
       {/* 2nd row table */}
       <hr />
-      <Grid container mt={3} md={11} className="projectTable">
+      <Grid container md={11} className="projectTable">
         <DataTable
           title="Projects"
           columns={columns}
-          data={data}
+          data={projects}
           pagination
           fixedHeader
           highlightOnHover

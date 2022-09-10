@@ -1,5 +1,6 @@
-import axios from "axios";
+
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import api from "../../api/axiosConfig";
 
 export const registerUser = createAsyncThunk(
   "/registerUser",
@@ -10,8 +11,8 @@ export const registerUser = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      await axios.post(
-        "http://127.0.0.1:5000/signup",
+      await api.post(
+        "/signup",
         { name, email, phone, password },
         config
       );
@@ -34,8 +35,8 @@ export const userLogin = createAsyncThunk(
           'Content-Type': 'application/json',
         }
       }
-      const {data} = await axios.post(
-        "http://127.0.0.1:5000/login",
+      const {data} = await api.post(
+        "/login",
         {email,password},
         config
       )
@@ -68,7 +69,7 @@ export const getUserDetails = createAsyncThunk(
           Authorization: `Bearer ${user.userToken}`,
         },
       };
-      const { data } = await axios.get(`http://127.0.0.1:5000/profile`, config);
+      const { data } = await api.get(`/profile`, config);
       
       console.log(data)
     } catch (error) {
