@@ -37,8 +37,6 @@ const registerUser = asyncHandler(async(req,res)=>{
             name:user.name,
             email:user.email,
             phone:user.phone,
-            age:user.age,
-            token: generateToken(user._id)
         })
     }else{
         res.status(400)
@@ -55,7 +53,8 @@ const authUser = asyncHandler(async(req,res)=>{
             name:user.name,
             email:user.email,
             phone:user.phone,
-            token:generateToken(user._id)
+            token:generateToken(user._id),
+            premium:user.premium
         })
     }else{
         res.status(400)
@@ -95,18 +94,35 @@ const createSubscription = asyncHandler(async(req,res)=>{
 const subSuccess = asyncHandler(async(req,res)=>{
   try {
     const crypto = require('crypto')
-    
-    const { paymentId, subscriptionId, signature } = req.body;
+    console.log(req.body,"sub sucess")
+    const { paymentId, subscriptionId, signature ,userId} = req.body;
      let hmac = crypto.createHmac("sha256", process.env.RAZORPAY_SECRET);
      hmac.update(paymentId + "|" + subscriptionId);
      hmac = hmac.digest("hex");
      if (hmac == signature) {
        console.log("success")
        res.json({msg:"success"})
+      
        
      } else {
        console.log("error")
      }
+
+      let updateStatus = await User.updateOne(
+        { _id: userId },
+        {
+          $set: {
+            premium: true,
+            subscriptionId: subscriptionId,
+          },
+        }
+      );
+      if(updateStatus){
+        console.log("Status updated")
+      }
+
+
+     
      
 
   } catch (error) {

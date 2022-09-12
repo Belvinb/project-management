@@ -195,7 +195,7 @@ const Header = () => {
           ) : (
             <MenuItem key="" onClick="">
               <Link to="/login">
-                <Typography style={{ color: "black" }} textAlign="center">
+                <Typography style={{ color: "black",textDecoration:"none"}} textAlign="center">
                   Login
                 </Typography>
               </Link>

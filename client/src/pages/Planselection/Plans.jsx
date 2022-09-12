@@ -16,6 +16,8 @@ import GlobalStyles from "@mui/material/GlobalStyles";
 import Container from "@mui/material/Container";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../../api/axiosConfig";
+import { useSelector } from "react-redux";
 
 const tiers = [
   {
@@ -59,6 +61,10 @@ const tiers = [
 
 
 const Plans = () => {
+
+  const { signupInfo } = useSelector((state) => state.user);
+  console.log(signupInfo, "info user");
+   
   const navigate = useNavigate();
 
   function loadScript(src) {
@@ -121,12 +127,14 @@ const Plans = () => {
             paymentId: response.razorpay_payment_id,
             subscriptionId: response.razorpay_subscription_id,
             signature: response.razorpay_signature,
+            userId: signupInfo._id,
           };
           const details = await axios.post(
             "http://127.0.0.1:5000/subSuccess",
             data
           );
           if (details) {
+            console.log(details,"detailss")
             navigate("/login");
           }
         },

@@ -23,6 +23,7 @@ var randomString = require("random-string");
 
 
 
+
 // modal for create and join project
 const style = {
   position: "absolute",
@@ -341,6 +342,7 @@ const Home = () => {
         </Grid>
 
         {/* col section 2 */}
+        {user.premium ? 
         <Grid
           item
           xs={12}
@@ -374,6 +376,7 @@ const Home = () => {
             Create a project
           </Button>
         </Grid>
+        : <h3>upgrade your package to premium to create projects</h3>}
       </Grid>
 
       {/* 2nd row table */}

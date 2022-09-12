@@ -11,11 +11,13 @@ export const registerUser = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      await api.post(
+      const register = await api.post(
         "/signup",
         { name, email, phone, password },
         config
       );
+      console.log(register,"registere");
+      return register;
     } catch (error) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);

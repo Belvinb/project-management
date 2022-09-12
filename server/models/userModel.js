@@ -24,6 +24,9 @@ const userSchema = new mongoose.Schema(
     premium:{
       type:Boolean,
       default:false
+    },
+    subscriptionId:{
+      type:String
     }
   },
   {

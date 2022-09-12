@@ -6,7 +6,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea } from "@mui/material";
-
+import Footer from "../../components/Footer/Footer";
+import { Link } from "react-router-dom";
 
 const features = [
   {
@@ -70,7 +71,12 @@ const Landingpage = () => {
             style={{ display: "flex", paddingLeft: "2rem" }}
           >
             <Card
-              sx={{ width: 295, height: 300, marginTop: "6rem" }}
+              sx={{
+                width: 295,
+                height: 300,
+                marginTop: "6rem",
+                marginRight: "1rem",
+              }}
               style={{
                 boxShadow:
                   "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19",
@@ -104,17 +110,22 @@ const Landingpage = () => {
         >
           <h3 style={{}}>
             Create your first project <br /> with <br />
-            <span style={{ fontSize: "40px", marginTop: "2rem" }}>
+            <span style={{ fontSize: "35px", marginTop: "2rem" }}>
               <span style={{ color: "red" }}>A</span>VENTURE
             </span>
           </h3>
 
-          <Button style={{ backgroundColor: "#ef233c",marginTop:"2rem" }} size="large" variant="contained">
-            Let's Go
+          <Button
+            style={{ backgroundColor: "#ef233c", marginTop: "2rem" }}
+            size="large"
+            variant="contained"
+          >
+            <Link to ="/signup" style={{color:"white",textDecoration:"none"}}>Let's Go</Link>
           </Button>
         </Grid>
         <Grid item sm={12} md={6} className="startsec2"></Grid>
       </Grid>
+      <Footer />
     </>
   );
 };

@@ -57,7 +57,7 @@ const inviteMembers = asyncHandler(async (req, res) => {
     from: "belvinbbenny@gmail.com", // sender address
     to: `${email}`, // list of receivers
     subject: "Invitation", // Subject line
-    html: `${projectCode.projectID}`, // plain text body
+    html: `Enter the code provided to join the project : ${projectCode.projectID}`, // plain text body
   };
   try {
     transporter.sendMail(mailOptions, function (err, info) {
@@ -84,7 +84,7 @@ const joinProject = asyncHandler(async (req, res) => {
   let joined = await Projects.updateOne(
     { ProjectID: projectCode },
     {
-      $push: { members: userId },
+      $push: { "members": userId },
     }
   );
   if(joined){
@@ -95,9 +95,20 @@ const joinProject = asyncHandler(async (req, res) => {
   }
 });
 
+const getTeam = asyncHandler(async(req,res)=>{
+  const {projectId} = req.params
+  console.log(req.params)
+  // Projects.aggregate([
+  //   {
+  //     $match : {}
+  //   }
+  // ])
+})
+
 module.exports = {
   createProject,
   myCreatedProjects,
   joinProject,
   inviteMembers,
+  getTeam,
 };

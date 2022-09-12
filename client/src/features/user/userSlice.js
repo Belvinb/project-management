@@ -13,6 +13,7 @@ console.log(userToken,"hhhh")
 const initialState = {
     loading:false,
     userInfo:null,
+    signupInfo:null,
     userToken,
     error:null,
     sucess:false,
@@ -52,6 +53,8 @@ const userSlice = createSlice({
     [registerUser.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.success = true;
+      state.signupInfo = payload.data;
+     
     },
     [registerUser.rejected]: (state, { payload }) => {
       state.loading = false;

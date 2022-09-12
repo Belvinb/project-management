@@ -7,6 +7,8 @@ import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import api from "../../api/axiosConfig";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const columns = [
   {
@@ -49,6 +51,17 @@ const ProjectTeam = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   let projectId = JSON.parse(localStorage.getItem("projectId"));
+  let location = useLocation();
+
+  useEffect(() => {
+    function myTeam(){
+      console.log(projectId)
+      api.get(`/getTeam/${projectId}`).then((response) => {
+        console.log(response);
+      });
+    }
+    myTeam()
+  }, [location])
 
   const {
     control,
@@ -59,7 +72,7 @@ const ProjectTeam = () => {
   const onSubmit = async (data) => {
     const inviteDetails = {
       projectId: projectId,
-      email : data.invite
+      email: data.invite,
     };
     try {
       const config = {
@@ -67,15 +80,11 @@ const ProjectTeam = () => {
           "Content-Type": "application/json",
         },
       };
-      let {invite} = await api.post("/invite",inviteDetails,config)
-      if(invite){
-        console.log(invite,"suceess")
+      let { invite } = await api.post("/invite", inviteDetails, config);
+      if (invite) {
+        console.log(invite, "suceess");
       }
-
-    } catch (error) {
-      
-    }
-    
+    } catch (error) {}
   };
 
   return (
