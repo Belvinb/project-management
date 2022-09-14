@@ -79,20 +79,29 @@ const joinProject = asyncHandler(async (req, res) => {
   const { email, projectCode, userId } = req.body;
   console.log(req.body);
   const projectValidation = await Projects.find({
-    $and: [{ projectID: projectCode }, { invites: email }],
+    $and: [{ "projectID": projectCode }, { "invites": email }],
   });
-  let joined = await Projects.updateOne(
-    { ProjectID: projectCode },
+  console.log(projectValidation,"validation")
+
+  if(projectValidation){
+    return await Projects.updateOne({"projectID":projectCode},
     {
-      $push: { "members": userId },
+      $push:{"members":userId}
     }
-  );
-  if(joined){
-    console.log("added to members")
+    ).then((response)=>{
+      console.log(response,"response")
+    })
   }
-  if (projectValidation) {
-    console.log("sucess joined");
-  }
+
+
+
+
+  // let joined = await Projects.updateOne(
+  //   { "ProjectID": projectCode},
+  //   {
+  //     $push: { "members": userId },
+  //   }
+  // );
 });
 
 const getTeam = asyncHandler(async(req,res)=>{

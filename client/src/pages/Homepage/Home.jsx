@@ -148,12 +148,14 @@ const Home = () => {
 
   //handler for join project
   const joinProject = async(data) =>{
+    
     const joinDetails = {
       email : user.email,
       projectCode: data.join,
       userId : user._id
     }
-    handleJoinClose()
+   
+    handleJoinClose();
     setrefresh(!refresh)
     try {
       const config = {
@@ -161,13 +163,14 @@ const Home = () => {
           "Content-Type": "application/json",
         },
       };
-      let { invite } = await api.post("/joinProject", joinDetails, config);
-      if(invite){
-        console.log(invite,"suceess")
-      }
+      
+      return await api.post("/joinProject", joinDetails, config);
+      
+     
 
     } catch (error) {
-      
+      console.log(error)
+
     }
     
   }

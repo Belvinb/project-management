@@ -28,7 +28,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userInfo) {
+    if (user) {
       navigate("/home");
     }
   }, [userInfo, navigate]);
