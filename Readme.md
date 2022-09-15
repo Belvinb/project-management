@@ -14,7 +14,7 @@ The website is divided into two sections - users and admin<br/>
   1. Workflow - user can view all the tasks and sub tasks created for the project and understand the current status of the project
   2. Members - user can view all other members who have joined the project and the project owner can send invites to more users.
   
-===
+===========================================================================================
 ### ToDo<br/>
 1. Add option to create tasks and assign to members in the project.
 2. create subtasks for already created tasks.
