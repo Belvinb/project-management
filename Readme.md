@@ -16,3 +16,8 @@ The website is divided into two sections - users and admin<br/>
   
 ===
 ### ToDo<br/>
+1. Add option to create tasks and assign to members in the project.
+2. create subtasks for already created tasks.
+3. chat room for project members to interact and discuss.
+4. Admin side management of registered users and payments received.
+5. user profile management.
