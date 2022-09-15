@@ -25,7 +25,7 @@ const createProject = asyncHandler(async (req, res) => {
   });
 
   if (projects) {
-    res.status(200)
+    res.status(200).json(projects)
   }
 });
 
@@ -89,7 +89,7 @@ const joinProject = asyncHandler(async (req, res) => {
       $push:{"members":userId}
     }
     ).then((response)=>{
-      console.log(response,"response")
+      res.status(200).json(response)
     })
   }
 

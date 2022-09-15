@@ -10,7 +10,9 @@ export const createProject = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      await api.post("/createProject", data, config);
+      const create = await api.post("/createProject", data, config);
+      console.log(create,"create")
+      return create
     } catch (error) {
         if(error.response && error.response.data.message){
             return rejectWithValue(error.response.data.message)
@@ -18,3 +20,23 @@ export const createProject = createAsyncThunk(
     }
   }
 );
+
+export const joinProject = createAsyncThunk(
+  "user/joinProject",
+  async(data,{rejectWithValue})=>{
+    try {
+       const config = {
+         headers: {
+           "Content-Type": "application/json",
+         },
+       };
+       const join = await api.post("/joinProject", data, config);
+       return join
+      
+    } catch (error) {
+      
+    }
+     
+    
+  }
+)

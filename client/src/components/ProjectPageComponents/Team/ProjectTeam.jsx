@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import api from "../../api/axiosConfig";
+import api from "../../../api/axiosConfig";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
