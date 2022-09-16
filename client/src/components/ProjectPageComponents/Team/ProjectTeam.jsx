@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 const columns = [
   {
     name: "Title",
-    selector: (row) => row.title,
+    selector: (row) => row.name,
   },
   {
     name: "Year",
@@ -48,23 +48,26 @@ const style = {
 
 const ProjectTeam = () => {
   const [open, setOpen] = React.useState(false);
+  const [members,setmembers] = React.useState([])
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   let projectId = JSON.parse(localStorage.getItem("projectId"));
   let location = useLocation();
 
   useEffect(() => {
-    function myTeam(){
+    async function myTeam(){
       console.log(projectId)
-      api.get(`/getTeam/${projectId}`).then((response) => {
-        console.log(response);
+      return await api.get(`/getTeam/${projectId}`).then((response) => {
+        setmembers(response.data[0].projectmems)
+        console.log(members)
       });
+
     }
     myTeam()
   }, [location])
 
+ 
   const {
-    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -123,7 +126,7 @@ const ProjectTeam = () => {
         </Box>
       </Modal>
 
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={members} />
     </div>
   );
 };

@@ -19,7 +19,7 @@ const projectSchema = new mongoose.Schema(
             required:true
         },
         createdBy:{
-            type:String,
+            type:mongoose.Schema.Types.ObjectId,
             required:true
         },
         projectID:{
@@ -29,9 +29,9 @@ const projectSchema = new mongoose.Schema(
         invites:{
             type:Array
         },
-        members:{
-            type:Array
-        }
+        members:[{
+            type:mongoose.Schema.Types.ObjectId
+        }]
     }
 )
 

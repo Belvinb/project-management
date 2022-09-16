@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const { Projects } = require("../models/projectModel");
+const mongoose = require("mongoose");
 var nodemailer = require("nodemailer");
 
 var transporter = nodemailer.createTransport({
@@ -32,8 +33,6 @@ const createProject = asyncHandler(async (req, res) => {
 // view all projects
 const myCreatedProjects = asyncHandler(async (req, res) => {
   const { myId } = req.params;
-  console.log(req.params);
-  console.log(myId);
   const myProjects = await Projects.find({
     $or: [
       {
@@ -77,12 +76,9 @@ const inviteMembers = asyncHandler(async (req, res) => {
 //join projects
 const joinProject = asyncHandler(async (req, res) => {
   const { email, projectCode, userId } = req.body;
-  console.log(req.body);
   const projectValidation = await Projects.find({
     $and: [{ "projectID": projectCode }, { "invites": email }],
   });
-  console.log(projectValidation,"validation")
-
   if(projectValidation){
     return await Projects.updateOne({"projectID":projectCode},
     {
@@ -93,25 +89,29 @@ const joinProject = asyncHandler(async (req, res) => {
     })
   }
 
-
-
-
-  // let joined = await Projects.updateOne(
-  //   { "ProjectID": projectCode},
-  //   {
-  //     $push: { "members": userId },
-  //   }
-  // );
 });
 
 const getTeam = asyncHandler(async(req,res)=>{
   const {projectId} = req.params
-  console.log(req.params)
-  // Projects.aggregate([
-  //   {
-  //     $match : {}
-  //   }
-  // ])
+  console.log(req.params,"params")
+  let members = await Projects.aggregate([
+    {
+      $match: { _id: new mongoose.Types.ObjectId(projectId) },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField:"members",
+        foreignField: "_id",
+        as:"projectmems"
+      },
+    },
+    {
+      $project:{projectmems:1}
+    },
+    
+  ])
+  res.status(200).json(members)
 })
 
 module.exports = {
