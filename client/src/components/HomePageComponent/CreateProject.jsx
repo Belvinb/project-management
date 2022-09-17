@@ -78,12 +78,12 @@ const CreateProject = () =>{
         aria-describedby="modal-modal-description"
       >
         <Box sx={style} xs={8} md={12}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h6" component="h2" m={2}>
             create a project
           </Typography>
           <Box m={3} component="form" onSubmit={handleSubmit(onSubmit)}>
             <Grid container style={{ justifyContent: "space-around" }}>
-              <Grid item>
+              <Grid item m={2}>
                 <TextField
                   error={!!errors.title}
                   margin="normal"
@@ -99,7 +99,7 @@ const CreateProject = () =>{
                   />
               </Grid>
 
-              <Grid item>
+              <Grid item m={2}>
                 <TextField
                   margin="normal"
                   required
@@ -112,7 +112,7 @@ const CreateProject = () =>{
                 />
               </Grid>
 
-              <Grid item>
+              <Grid item m={2}>
                 <Controller
                   name="startDate"
                   defaultValue={startDate}
@@ -136,7 +136,7 @@ const CreateProject = () =>{
                 />
               </Grid>
 
-              <Grid item>
+              <Grid item m={2}>
                 <Controller
                   name="endDate"
                   defaultValue={endDate}

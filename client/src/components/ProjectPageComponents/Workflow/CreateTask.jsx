@@ -108,7 +108,7 @@ const CreateTask = () =>{
           <Box component="form" onSubmit={handleSubmit(createTask)}>
             <Grid container style={{ justifyContent: "space-around" }}>
               {/* task title component */}
-              <Grid item>
+              <Grid item xs={5} m={2}>
                 <Controller
                   name="taskTitle"
                   control={control}
@@ -133,7 +133,7 @@ const CreateTask = () =>{
 
               {/* task description */}
 
-              <Grid item>
+              <Grid item xs={5} m={2}>
                 <Controller
                   name="taskDescription"
                   control={control}
@@ -159,7 +159,7 @@ const CreateTask = () =>{
               </Grid>
 
               {/* task start date */}
-              <Grid item>
+              <Grid item xs={5} m={2}>
                 <Controller
                   name="startDate"
                   defaultValue={startDate}
@@ -184,7 +184,7 @@ const CreateTask = () =>{
               </Grid>
 
               {/* task end date */}
-              <Grid item>
+              <Grid item xs={5} m={2}>
                 <Controller
                   name="endDate"
                   control={control}
@@ -209,7 +209,7 @@ const CreateTask = () =>{
               </Grid>
 
               {/* assigned member */}
-              <Grid item>
+              <Grid item xs={5} m={2}>
                 <Controller
                   name="assigned"
                   control={control}
@@ -220,13 +220,19 @@ const CreateTask = () =>{
                       id="outlined-select-currency"
                       select
                       value={assigned}
-                      label="Select"
+                      fullWidth
+                      label="assign"
                       onChange={(event) => {
                         onChange(event);
                         setassigned(event.target.value);
                         console.log(assigned, "iii");
                       }}
-                      helperText="Please select your currency"
+                      error={!!errors.assigned}
+                      helperText={
+                        !!errors.assigned
+                          ? "please select a memeber to assign"
+                          : ""
+                      }
                     >
                       {members.map((option) => (
                         <MenuItem key={option.email} value={option.email}>

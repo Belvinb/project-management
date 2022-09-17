@@ -158,19 +158,17 @@ const Project = () => {
               </ListItemButton>
             </Link>
 
-            <ListItemButton>
-              <ListItemIcon>
-                <AssignmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Assigned Tasks" />
-            </ListItemButton>
-
-            <ListItemButton>
-              <ListItemIcon>
-                <AddBoxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Create Tasks" />
-            </ListItemButton>
+            <Link
+              to={`/project/assignedTasks/${projectId}`}
+              style={{ textDecoration: "none", color: "blue" }}
+            >
+              <ListItemButton>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Assigned Tasks" />
+              </ListItemButton>
+            </Link>
 
             <Link
               to={`/project/team/${projectId}`}

@@ -11,6 +11,7 @@ const ProtectedRoute = React.lazy(() => import("./routing/ProtectedRoute"));
 const Project = React.lazy(()=> import("./pages/projectDetails/Project"))
 const Workflow = React.lazy(()=>import("./components/ProjectPageComponents/Workflow/Workflow"))
 const ProjectTeam = React.lazy(()=>import("./components/ProjectPageComponents/Team/ProjectTeam"))
+const AssignedTasks = React.lazy(()=>import("./components/ProjectPageComponents/AssignedTasks/AssignedTasks"))
 function App() {
   return (
     <Suspense fallback={<Loader />}>
@@ -28,6 +29,7 @@ function App() {
           <Route   element={<Project/>}>
             <Route path="/project/workflow/:projectId" element={<Workflow/>}/>
             <Route path="/project/team/:projectId" element={<ProjectTeam/>}/>
+            <Route path="/project/assignedTasks/:projectId" element={<AssignedTasks/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

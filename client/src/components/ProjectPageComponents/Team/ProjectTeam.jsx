@@ -12,27 +12,15 @@ import { useLocation } from "react-router-dom";
 
 const columns = [
   {
-    name: "Title",
+    name: "Name",
     selector: (row) => row.name,
   },
   {
-    name: "Year",
-    selector: (row) => row.year,
+    name: "Email",
+    selector: (row) => row.email,
   },
 ];
 
-const data = [
-  {
-    id: 1,
-    title: "Beetlejuice",
-    year: "1988",
-  },
-  {
-    id: 2,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-];
 
 const style = {
   position: "absolute",
@@ -126,7 +114,14 @@ const ProjectTeam = () => {
         </Box>
       </Modal>
 
-      <DataTable columns={columns} data={members} />
+      <DataTable
+        title="Project Members"
+        columns={columns}
+        data={members}
+        pagination
+        fixedHeader
+        highlightOnHover
+      />
     </div>
   );
 };
