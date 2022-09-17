@@ -1,8 +1,12 @@
 import React from 'react'
+import CreateTask from './CreateTask'
+
 
 const Workflow = () => {
   return (
-    <div>Workflow</div>
+   <>
+   <CreateTask/>
+   </>
   )
 }
 

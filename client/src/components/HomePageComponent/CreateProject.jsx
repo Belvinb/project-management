@@ -85,6 +85,7 @@ const CreateProject = () =>{
             <Grid container style={{ justifyContent: "space-around" }}>
               <Grid item>
                 <TextField
+                  error={!!errors.title}
                   margin="normal"
                   required
                   fullWidth
@@ -92,8 +93,10 @@ const CreateProject = () =>{
                   label="Project Title"
                   name="title"
                   autoFocus
-                  {...register("title", { shouldValidate: true })}
-                />
+                  {...register("title", {
+                    required: true,
+                  })}
+                  />
               </Grid>
 
               <Grid item>

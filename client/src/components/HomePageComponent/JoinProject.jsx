@@ -11,10 +11,8 @@ const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
-  margin: "auto",
   transform: "translate(-50%, -50%)",
-  width: "auto",
-  
+  width: "800",
   bgcolor: "background.paper",
   border: "1px solid #000",
   boxShadow: 24,
@@ -60,25 +58,27 @@ const JoinProject = () =>{
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Enter invite code
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <TextField
-              margin="normal"
-              required
+          <Box m={3}>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="join"
+                name="join"
+                autoFocus
+                {...register2("join", { shouldValidate: true })}
+              />
+            </Typography>
+            <Button
+              type="submit"
               fullWidth
-              id="join"
-              name="join"
-              autoFocus
-              {...register2("join", { shouldValidate: true })}
-            />
-          </Typography>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Join
-          </Button>
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Join
+            </Button>
+          </Box>
         </Box>
       </Modal>
 
