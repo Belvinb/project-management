@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createTaskAction } from "./taskActions";
+import { createTaskAction, changeTaskStatus } from "./taskActions";
 
 const initialState = {
     loading:false,
@@ -23,8 +23,18 @@ const taskSlice = createSlice({
     },
     [createTaskAction.rejected]: (state, { payload }) => {
       state.loading = false;
-     
     },
+    [changeTaskStatus.pending]:(state) => {
+      state.loading = true;
+      state.error = null
+    },
+    [changeTaskStatus.fulfilled] : (state,{payload}) => {
+      state.loading = false;
+      state.taskDetails = payload
+    },
+    [changeTaskStatus.rejected] : (state) => {
+      state.loading = false;
+    }
   },
 });
 

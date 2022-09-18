@@ -1,6 +1,11 @@
 const express = require("express");
 const { createProject, myCreatedProjects, joinProject, inviteMembers, getTeam } = require("../controllers/projectControllers");
-const { createTask, viewAllTasks } = require("../controllers/taskControllers");
+const {
+  createTask,
+  viewAllTasks,
+  viewAssignedTasks,
+  changeTaskStatus,
+} = require("../controllers/taskControllers");
 const { registerUser, authUser, createSubscription, subSuccess, getProfile } = require("../controllers/userControllers");
 const router = express.Router();
 
@@ -16,6 +21,8 @@ router.post("/invite", inviteMembers);
 router.get("/getTeam/:projectId", getTeam);
 router.post("/createTask", createTask);
 router.get("/viewAllTasks/:projectId", viewAllTasks);
+router.get("/viewAssignedTasks", viewAssignedTasks);
+router.post("/changeTaskStatus", changeTaskStatus);
 
 
 module.exports = router

@@ -22,3 +22,26 @@ export const createTaskAction = createAsyncThunk(
     }
 )
 
+export const changeTaskStatus = createAsyncThunk(
+    "user/changeTaskStatus",
+    async(data,{rejectWithValue})=>{
+        try {
+            const config = {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            };
+            const changeStatus = await api.post("/changeTaskStatus",data,config)
+            console.log(changeStatus);
+            return changeStatus.data;
+
+            
+        } catch (error) {
+             if (error.response && error.response.data.message) {
+               return rejectWithValue(error.response.data.message);
+             }
+            
+        }
+    }
+)
+
