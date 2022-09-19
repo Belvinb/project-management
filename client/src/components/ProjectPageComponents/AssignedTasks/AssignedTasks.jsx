@@ -26,8 +26,9 @@ const projectStatus = [
 
 
 
-
+//assigned tasks
 const AssignedTasks = () => {
+
   const { taskDetails } = useSelector((state) => state.task);
   let projectId = JSON.parse(localStorage.getItem("projectId"));
   let user = JSON.parse(localStorage.getItem("userToken"));
@@ -102,7 +103,7 @@ const AssignedTasks = () => {
   return (
     <>
       <DataTable
-        title="Assigned Tasks"
+        title="Assigned Task"
         columns={columns}
         data={assignedTasks}
         pagination
