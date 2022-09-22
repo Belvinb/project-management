@@ -2,12 +2,14 @@ const asyncHandler = require("express-async-handler");
 const { Projects } = require("../models/projectModel");
 const mongoose = require("mongoose");
 var nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+dotenv.config()
 
 var transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "belvinbbenny@gmail.com",
-    pass: "wvigtoitzhlcxnnq",
+    pass: process.env.NODEMAILER_PASS,
   },
 });
 

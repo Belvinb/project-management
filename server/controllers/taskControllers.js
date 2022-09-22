@@ -3,14 +3,6 @@ const { Tasks } = require("../models/taskModel");
 const mongoose = require("mongoose");
 var nodemailer = require("nodemailer");
 
-var transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "belvinbbenny@gmail.com",
-    pass: "wvigtoitzhlcxnnq",
-  },
-});
-
 const createTask = asyncHandler(async (req, res) => {
   const {
     taskTitle,
