@@ -4,6 +4,7 @@ import api from "../../../api/axiosConfig";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Button } from "@mui/material";
 
 const columns = [
   {
@@ -26,6 +27,12 @@ const columns = [
     name: "status",
     selector: (row) => row.status,
   },
+  {
+    name : "Details",
+    cell : (row)=>(
+      <Button style = {{ backgroundColor: "blue",color:"white" }}>open</Button>
+    )
+  }
 ];
 
 const AllTasks = () => {
