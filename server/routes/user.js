@@ -5,6 +5,7 @@ const {
   viewAllTasks,
   viewAssignedTasks,
   changeTaskStatus,
+  getSingleTaskDetails,
 } = require("../controllers/taskControllers");
 const { registerUser, authUser, createSubscription, subSuccess, getProfile } = require("../controllers/userControllers");
 const router = express.Router();
@@ -23,6 +24,9 @@ router.post("/createTask", createTask);
 router.get("/viewAllTasks/:projectId", viewAllTasks);
 router.get("/viewAssignedTasks", viewAssignedTasks);
 router.post("/changeTaskStatus", changeTaskStatus);
+
+//get single task details
+router.get("/getSingleTaskDetails/:taskId", getSingleTaskDetails);
 
 
 module.exports = router
