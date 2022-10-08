@@ -80,7 +80,8 @@ const AllTasks = () => {
 
   return (
     <>
-      <ViewSingleTask open={open} handleClose={handleClose} taskId={taskId} />
+    {open?
+      <ViewSingleTask open={open} handleClose={handleClose} taskId={taskId} />:""}
       <DataTable
         title="All Tasks"
         columns={columns}

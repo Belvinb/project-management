@@ -43,22 +43,18 @@ const ProjectTeam = () => {
   let location = useLocation();
 
   useEffect(() => {
-    async function myTeam(){
-      console.log(projectId)
+    async function myTeam() {
       return await api.get(`/getTeam/${projectId}`).then((response) => {
-        setmembers(response.data[0].projectmems)
-        console.log(members)
+        setmembers(response.data[0].projectmems);
       });
-
     }
-    myTeam()
-  }, [location])
+    myTeam();
+  }, [location, projectId]);
 
  
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
     const inviteDetails = {

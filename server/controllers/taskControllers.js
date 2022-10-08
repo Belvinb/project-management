@@ -1,7 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const { Tasks } = require("../models/taskModel");
-const mongoose = require("mongoose");
-var nodemailer = require("nodemailer");
+
 
 const createTask = asyncHandler(async (req, res) => {
   const {
@@ -59,9 +58,14 @@ const changeTaskStatus = asyncHandler(async(req,res)=>{
 })
 
 const getSingleTaskDetails = asyncHandler(async(req,res)=>{
-  const {taskId} = req.params
-  const TaskDetails = await Tasks.findById(taskId)
-  res.status(200).json(TaskDetails)
+  try {
+     const { taskId } = req.params;
+     const TaskDetails = await Tasks.findById(taskId);
+     res.status(200).json(TaskDetails);
+  } catch (error) {
+    console.log(error)
+  }
+ 
 })
 
 module.exports = {

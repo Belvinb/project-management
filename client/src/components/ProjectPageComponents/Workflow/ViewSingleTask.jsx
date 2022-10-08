@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Box, Modal } from "@mui/material";
 import api from "../../../api/axiosConfig";
+import Loader from "../../loader/Loader";
 
 const style = {
   position: "absolute",
@@ -16,17 +17,23 @@ const style = {
 };
 
 const ViewSingleTask = ({ open, handleClose, taskId }) => {
+  const [taskDetails,setTaskDetails] = React.useState({})
+  const [loading,setLoading] = React.useState(false)
   React.useEffect(() => {
     async function getTaskDetails() {
+      setLoading(true)
       try {
         return await api
           .get(`getSingleTaskDetails/${taskId}`)
           .then((response) => {
-            console.log(response.data);
+            console.log(response.data)
+            setTaskDetails(response.data)
+            setLoading(false);
           });
       } catch (error) {
         console.log(error);
       }
+     
     }
 
     getTaskDetails();
@@ -39,7 +46,13 @@ const ViewSingleTask = ({ open, handleClose, taskId }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}></Box>
+        <Box sx={style}>
+          {loading && <Loader/>}
+          <h5>Task Title</h5>
+          <h3>{taskDetails.taskTitle}</h3>
+          <h5>Task Description</h5>
+          <h3>{taskDetails.taskDescription}</h3>
+        </Box>
       </Modal>
     </div>
   );

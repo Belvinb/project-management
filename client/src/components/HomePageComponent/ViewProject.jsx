@@ -16,7 +16,6 @@ const ViewProject = () =>{
       useEffect(() => {
         function myProjects() {
           const myId = user._id;
-          console.log(myId, "user id details");
           api.get(`/myCreatedProjects/${myId}`).then((response) => {
             setprojects(response.data);
           });

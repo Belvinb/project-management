@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {Box,Modal,Button, Typography, Grid, TextField, Stack, MenuItem} from '@mui/material'
 import { Controller, useForm } from 'react-hook-form'
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers'
@@ -47,10 +47,7 @@ const CreateTask = () =>{
   const [startDate, setStartDate] = React.useState(dayjs());
   const [endDate, setEndDate] = React.useState(dayjs());
 
-  //useeffect to display selected member
-  useEffect(() => {
-    console.log(assigned);
-  }, [assigned]);
+
 
   //get project members on clicking create task
   async function getMembers() {

@@ -21,7 +21,7 @@ const Home = () => {
       </Grid>
       {/* 2nd row table */}
       <hr />
-      <Grid container md={11} className="projectTable">
+      <Grid container  className="projectTable">
       <ViewProject/>
       </Grid>
     </>

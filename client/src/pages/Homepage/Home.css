@@ -11,12 +11,12 @@
 }
 
 .projectTable {
-  position: absolute;
+  position: relative;
   left: 50%;
-  margin-top: 2.8rem;
-  top: 35rem;
+  top: 15rem;
   transform: translate(-50%, -50%);
-  border: 1px solid black;
+  border: 2px solid black;
+  width: 90%;
 }
 
 
