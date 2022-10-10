@@ -68,10 +68,31 @@ const getSingleTaskDetails = asyncHandler(async(req,res)=>{
  
 })
 
+const addComment = async(req,res)=>{
+  try {
+    console.log(req.body,"comment in backend")
+    const {commentBody,taskinfo,userName,Date,Time} = req.body
+    const commentData ={
+      userName,
+      commentBody,
+      Date,
+      Time,
+    }
+    const commentDetails = await Tasks.findByIdAndUpdate(taskinfo,{
+      $push:{"comments":commentData}
+    })
+    console.log(commentDetails,"details")
+    res.status(201).json(commentDetails)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   createTask,
   viewAllTasks,
   viewAssignedTasks,
   changeTaskStatus,
   getSingleTaskDetails,
+  addComment,
 };

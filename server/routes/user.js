@@ -1,19 +1,32 @@
 const express = require("express");
-const { createProject, myCreatedProjects, joinProject, inviteMembers, getTeam } = require("../controllers/projectControllers");
+const {
+  createProject,
+  myCreatedProjects,
+  joinProject,
+  inviteMembers,
+  getTeam,
+} = require("../controllers/projectControllers");
 const {
   createTask,
   viewAllTasks,
   viewAssignedTasks,
   changeTaskStatus,
   getSingleTaskDetails,
+  addComment,
 } = require("../controllers/taskControllers");
-const { registerUser, authUser, createSubscription, subSuccess, getProfile } = require("../controllers/userControllers");
+const {
+  registerUser,
+  authUser,
+  createSubscription,
+  subSuccess,
+  getProfile,
+} = require("../controllers/userControllers");
 const router = express.Router();
 
 router.post("/signup", registerUser);
-router.post("/login",authUser)
-router.post("/subscription",createSubscription)
-router.post("/subSuccess",subSuccess)
+router.post("/login", authUser);
+router.post("/subscription", createSubscription);
+router.post("/subSuccess", subSuccess);
 router.get("/profile", getProfile);
 router.post("/createProject", createProject);
 router.get("/myCreatedProjects/:myId", myCreatedProjects);
@@ -28,5 +41,7 @@ router.post("/changeTaskStatus", changeTaskStatus);
 //get single task details
 router.get("/getSingleTaskDetails/:taskId", getSingleTaskDetails);
 
+//add comments
+router.post("/addComment", addComment);
 
-module.exports = router
+module.exports = router;

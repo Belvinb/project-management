@@ -33,6 +33,9 @@ const taskSchema = new mongoose.Schema(
         projectId:{
             type:mongoose.Schema.Types.ObjectId,
             required:true
+        },
+        comments:{
+            type:Array
         }
     }
 )

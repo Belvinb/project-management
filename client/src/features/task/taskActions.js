@@ -45,3 +45,29 @@ export const changeTaskStatus = createAsyncThunk(
     }
 )
 
+export const addComment = createAsyncThunk(
+  "user/addComment",
+  async(data,{rejectWithValue})=>{
+    try {
+      const config = {
+        headers:{
+          "Content-Type" : "application/json"
+        },
+      }
+      const comment = await api.post("/addComment",data,config)
+      console.log(comment,"comment data from backend")
+      return comment.data
+      
+    } catch (error) {
+      if(error.response && error.response.data.message){
+        return rejectWithValue(error.response.data.message)
+      }
+    }
+  }
+)
+
+
+
+
+
+

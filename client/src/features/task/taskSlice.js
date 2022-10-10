@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createTaskAction, changeTaskStatus } from "./taskActions";
+import { createTaskAction, changeTaskStatus,addComment } from "./taskActions";
 
 const initialState = {
     loading:false,
     taskDetails :{},
+    singleTask : {},
     error : null ,
     success : false
 }
@@ -34,6 +35,17 @@ const taskSlice = createSlice({
     },
     [changeTaskStatus.rejected] : (state) => {
       state.loading = false;
+    },
+    [addComment.pending]:(state)=>{
+      state.loading = true;
+      state.error = null;
+    },
+    [addComment.fulfilled] : (state,{payload})=>{
+      state.loading = false;
+      state.singleTask = payload
+    },
+    [addComment.rejected] : (state)=>{
+      state.loading = false
     }
   },
 });
