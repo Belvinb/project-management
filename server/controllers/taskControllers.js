@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const { Tasks } = require("../models/taskModel");
+const mongoose = require("mongoose");
 
 
 const createTask = asyncHandler(async (req, res) => {
@@ -60,8 +61,22 @@ const changeTaskStatus = asyncHandler(async(req,res)=>{
 const getSingleTaskDetails = asyncHandler(async(req,res)=>{
   try {
      const { taskId } = req.params;
-     const TaskDetails = await Tasks.findById(taskId);
-     res.status(200).json(TaskDetails);
+    //  const TaskDetails = await Tasks.findById(taskId);
+    //  res.status(200).json(TaskDetails);
+    const TaskDetails = await Tasks.aggregate([
+      {
+        $match:{_id:new mongoose.Types.ObjectId(taskId)}
+      },
+      {
+        $lookup:{
+          from:"subtasks",
+          localField:"_id",
+          foreignField:"taskId",
+          as:"subTasks"
+        }
+      }
+    ])
+    res.status(200).json(TaskDetails)
   } catch (error) {
     console.log(error)
   }

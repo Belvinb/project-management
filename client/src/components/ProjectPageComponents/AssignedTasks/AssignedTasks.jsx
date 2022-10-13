@@ -4,8 +4,9 @@ import api from "../../../api/axiosConfig";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, MenuItem, TextField } from "@mui/material";
+import {Button, MenuItem, TextField } from "@mui/material";
 import { changeTaskStatus } from "../../../features/task/taskActions";
+import ViewSingleTask from "../Workflow/ViewSingleTask";
 
 
 const projectStatus = [
@@ -36,6 +37,8 @@ const AssignedTasks = () => {
   const [assignedTasks, setassignedTasks] = useState([]);
   
   const [status,setStatus] = useState('')
+   const [open, setOpen] = React.useState(false);
+   const [taskId, setTaskId] = React.useState("");
 
    const dispatch = useDispatch();
 
@@ -59,6 +62,11 @@ const AssignedTasks = () => {
     viewAssignedTasks();
   }, [location, taskDetails, projectId]);
 
+    const handleOpen = (id) => {
+      setTaskId(id);
+      setOpen(true);
+    };
+    const handleClose = () => setOpen(false);
 
   const columns = [
     {
@@ -87,8 +95,8 @@ const AssignedTasks = () => {
         <TextField
           id="outlined-select-currency"
           select
-          value={row.status? row.status : status}
-          onChange={event => handleChange(event,row._id)}
+          value={row.status ? row.status : status}
+          onChange={(event) => handleChange(event, row._id)}
         >
           {projectStatus.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -98,10 +106,32 @@ const AssignedTasks = () => {
         </TextField>
       ),
     },
+    {
+      name: "Details",
+      cell: (row) => (
+        <Button
+          style={{
+            backgroundColor: "White",
+            color: "Blue",
+            border: "1px solid blue",
+          }}
+          onClick={() => {
+            handleOpen(row._id);
+          }}
+        >
+          open
+        </Button>
+      ),
+    },
   ];
 
   return (
     <>
+      {open ? (
+        <ViewSingleTask open={open} handleClose={handleClose} taskId={taskId} />
+      ) : (
+        ""
+      )}
       <DataTable
         title="Assigned Task"
         columns={columns}

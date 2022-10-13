@@ -5,12 +5,7 @@ export const createProject = createAsyncThunk(
   "user/createProject",
   async (data, { rejectWithValue }) => {
     try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const create = await api.post("/createProject", data, config);
+      const create = await api.post("/createProject", data);
       console.log(create,"create")
       return create
     } catch (error) {
@@ -25,12 +20,8 @@ export const joinProject = createAsyncThunk(
   "user/joinProject",
   async(data,{rejectWithValue})=>{
     try {
-       const config = {
-         headers: {
-           "Content-Type": "application/json",
-         },
-       };
-       const join = await api.post("/joinProject", data, config);
+    
+       const join = await api.post("/joinProject", data);
        return join
       
     } catch (error) {

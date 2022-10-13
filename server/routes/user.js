@@ -6,6 +6,7 @@ const {
   inviteMembers,
   getTeam,
 } = require("../controllers/projectControllers");
+const createSubTask = require("../controllers/subTaskController");
 const {
   createTask,
   viewAllTasks,
@@ -43,5 +44,8 @@ router.get("/getSingleTaskDetails/:taskId", getSingleTaskDetails);
 
 //add comments
 router.post("/addComment", addComment);
+
+//create subTask
+router.post("/createSubTasks", createSubTask);
 
 module.exports = router;
