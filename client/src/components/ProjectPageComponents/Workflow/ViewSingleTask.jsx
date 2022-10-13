@@ -176,7 +176,7 @@ const ViewSingleTask = ({ open, handleClose, taskId }) => {
               </h4>
               <DataTable
                 columns={columns}
-                data={taskDetails.subTasks}
+                data={taskDetails.subTasks?.reverse()}
                 highlightOnHover
                 noHeader={true}
               />

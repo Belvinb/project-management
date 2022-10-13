@@ -12,6 +12,7 @@ const Project = React.lazy(()=> import("./pages/projectDetails/Project"))
 const Workflow = React.lazy(()=>import("./components/ProjectPageComponents/Workflow/Workflow"))
 const ProjectTeam = React.lazy(()=>import("./components/ProjectPageComponents/Team/ProjectTeam"))
 const AssignedTasks = React.lazy(()=>import("./components/ProjectPageComponents/AssignedTasks/AssignedTasks"))
+const ChatBox = React.lazy(()=> import("./components/ProjectPageComponents/Chat/ChatBox"))
 function App() {
   return (
     <Suspense fallback={<Loader />}>
@@ -30,6 +31,7 @@ function App() {
             <Route path="/project/workflow/:projectId" element={<Workflow/>}/>
             <Route path="/project/team/:projectId" element={<ProjectTeam/>}/>
             <Route path="/project/assignedTasks/:projectId" element={<AssignedTasks/>}/>
+            <Route path="/project/chat/:projectId" element={<ChatBox/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

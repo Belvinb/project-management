@@ -19,8 +19,8 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import ChatIcon from "@mui/icons-material/Chat";
 import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
-import AddBoxIcon from "@mui/icons-material/AddBox";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
@@ -179,6 +179,18 @@ const Project = () => {
                   <AccountCircleIcon />
                 </ListItemIcon>
                 <ListItemText primary="Team" />
+              </ListItemButton>
+            </Link>
+
+            <Link
+              to={`/project/chat/${projectId}`}
+              style={{ textDecoration: "none", color: "blue" }}
+            >
+              <ListItemButton>
+                <ListItemIcon>
+                  <ChatIcon />
+                </ListItemIcon>
+                <ListItemText primary="Chat" />
               </ListItemButton>
             </Link>
 
