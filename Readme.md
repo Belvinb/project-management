@@ -64,3 +64,50 @@ $ npm start
 ```
 ## Screenshots : <br/>
 
+### Home page
+![Home page 1](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016412/Aventur/Screenshot_from_2022-10-17_19-42-36_i6siaq.png)
+
+![Home page 2](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016412/Aventur/Screenshot_from_2022-10-17_19-43-59_kkhjg1.png)
+
+### Signup page
+![Sign up](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016408/Aventur/Screenshot_from_2022-10-17_19-44-18_qbws49.png)
+
+### Login page
+![login](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016408/Aventur/Screenshot_from_2022-10-17_19-44-33_iy8mnz.png)
+
+### Project home page
+![project home](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016411/Aventur/Screenshot_from_2022-10-17_19-44-58_zzltvk.png)
+
+![all projects](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016411/Aventur/Screenshot_from_2022-10-17_19-45-09_lqqxl6.png)
+
+### Create projects
+![create projects](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016415/Aventur/Screenshot_from_2022-10-17_19-46-47_jo2o1q.png)
+
+### Join projects
+![join projects](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016416/Aventur/Screenshot_from_2022-10-17_19-46-53_oxmjpf.png)
+
+### project management page
+
+#### Workflow
+* All Tasks <br/>
+![All Tasks](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016411/Aventur/Screenshot_from_2022-10-17_19-46-11_vhsuze.png)
+* Create Task <br/>
+![create task](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016416/Aventur/Screenshot_from_2022-10-17_19-47-11_qy2fyz.png)
+
+#### Assigned Tasks
+![Assigned Tasks](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016412/Aventur/Screenshot_from_2022-10-17_19-46-27_ayhbbt.png)
+* View Task Details, create subtask ,add comments<br/>
+![Task](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016417/Aventur/Screenshot_from_2022-10-17_19-49-07_gxk8xt.png)
+![subTask](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016418/Aventur/Screenshot_from_2022-10-17_19-49-12_ra8ur3.png)
+
+#### Project members
+![members](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016412/Aventur/Screenshot_from_2022-10-17_19-46-35_jmjvzk.png)
+* Add members<br/>
+![Add members](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016415/Aventur/Screenshot_from_2022-10-17_19-47-20_vppsz8.png)
+
+
+#### Chat
+![chat](https://res.cloudinary.com/doxthu5pb/image/upload/v1666016416/Aventur/Screenshot_from_2022-10-17_19-48-48_ddydsx.png)
+
+
+
