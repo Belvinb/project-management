@@ -71,7 +71,6 @@ const ChatBox = () => {
               <div>
                 <div className="name" style={{ fontSize: "0.8rem" }}>
                   <span>
-                    <h2>user</h2>
                     {/* {userData?.lastname} */}
                   </span>
                 </div>
