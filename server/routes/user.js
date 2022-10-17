@@ -1,4 +1,5 @@
 const express = require("express");
+const { addChat, getChat } = require("../controllers/chatControllers");
 const {
   createProject,
   myCreatedProjects,
@@ -41,11 +42,13 @@ router.post("/changeTaskStatus", changeTaskStatus);
 
 //get single task details
 router.get("/getSingleTaskDetails/:taskId", getSingleTaskDetails);
-
 //add comments
 router.post("/addComment", addComment);
-
 //create subTask
 router.post("/createSubTasks", createSubTask);
+
+//chat routes
+router.get("/getChatDetails/:projectId",getChat)
+router.post("/addChat",addChat)
 
 module.exports = router;
