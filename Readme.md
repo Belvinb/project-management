@@ -5,7 +5,7 @@ Aventur is a simple project management website developed to turn the process of 
 
 * [Technologies used](#technologies-used)
 * [Features](#features)
-* [Setup]()
+* [Setup](#setup)
 * [Screenshots](#screenshots)
 
 
