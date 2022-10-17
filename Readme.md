@@ -3,7 +3,7 @@ Aventur is a simple project management website developed to turn the process of 
 
 ## Table of contents
 
-* [Technologies used](#technologies-used)
+* [Technologies used](#todo)
 
 
 ## Technologies used : <br/>
