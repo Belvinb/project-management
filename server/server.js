@@ -20,6 +20,14 @@ app.use(bodyParser.json());
 
 app.use(cors({ origin: true, credentials: true }));
 
+
+// Making Build Folder as Public 
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 //root routes
 app.use("/", userRoutes);
 app.use("/admin", adminRoutes);
