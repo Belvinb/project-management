@@ -44,7 +44,7 @@ const ViewSingleTask = ({ open, handleClose, taskId }) => {
       setLoading(true);
       try {
         return await api
-          .get(`getSingleTaskDetails/${taskId}`)
+          .get(`/getSingleTaskDetails/${taskId}`)
           .then((response) => {
             console.log(response.data);
             setTaskDetails(response.data[0]);
