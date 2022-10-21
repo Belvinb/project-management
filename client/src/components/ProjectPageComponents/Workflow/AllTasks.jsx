@@ -30,7 +30,7 @@ const AllTasks = () => {
   //get all tasks
   useEffect(() => {
     async function viewAllTasks() {
-      return await api.get(`viewAllTasks/${projectId}`).then((response) => {
+      return await api.get(`/viewAllTasks/${projectId}`).then((response) => {
         setallTasks(response.data);
       });
     }
