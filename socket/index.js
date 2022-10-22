@@ -1,8 +1,12 @@
-const io = require("socket.io")(8800, {
-  cors: {
-    origin: "http://localhost:3000",
-  },
-});
+// const io = require("socket.io")(8800, {
+//   cors: {
+//     origin: "http://localhost:3000",
+//   },
+// });
+
+const io = require("socket.io")(http,{
+  path:"/socket"
+})
 
 let roomId = [];
 
@@ -33,3 +37,7 @@ io.on("connection", (socket) => {
 //   const user = getUser(socket.id);
 //   io.in(user.room).emit("message", { user: user.name, text: message });
 // });
+
+http.listen(8800,function(){
+  console.log("listeneing on 8800")
+})

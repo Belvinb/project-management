@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "dayjs": "^1.11.5",
+    "http-proxy-middleware": "^2.0.6",
     "moment": "^2.29.4",
     "random-string": "^0.2.0",
     "react": "^18.2.0",
