@@ -24,10 +24,9 @@ const tiers = [
     title: "Free",
     price: "0",
     description: [
-      "plan details",
-      "plan details",
-      "plan details",
-      "plan details",
+      "join projects",
+      "create tasks & sub-tasks",
+      "group chat",
     ],
     buttonText: "Continue",
     buttonVariant: "outlined",
@@ -37,26 +36,26 @@ const tiers = [
     subheader: "Most popular",
     price: "500",
     description: [
-      "plan details",
-      "plan details",
-      "plan details",
-      "plan details",
+      "create projects",
+      "join projects",
+      "create tasks & sub-tasks",
+      "group chat",
     ],
     buttonText: "Continue",
     buttonVariant: "contained",
   },
-  {
-    title: "Enterprise",
-    price: "800",
-    description: [
-      "plan details",
-      "plan details",
-      "plan details",
-      "plan details",
-    ],
-    buttonText: "Continue",
-    buttonVariant: "outlined",
-  },
+  // {
+  //   title: "Enterprise",
+  //   price: "800",
+  //   description: [
+  //     "plan details",
+  //     "plan details",
+  //     "plan details",
+  //     "plan details",
+  //   ],
+  //   buttonText: "Continue",
+  //   buttonVariant: "outlined",
+  // },
 ];
 
 
@@ -101,7 +100,7 @@ const Plans = () => {
         return;
       }
       console.log("sdfdsf");
-      const result = await axios.post("http://127.0.0.1:5000/subscription");
+      const result = await axios.post("/subscription");
 
       console.log(result);
 
@@ -130,7 +129,7 @@ const Plans = () => {
             userId: signupInfo._id,
           };
           const details = await axios.post(
-            "http://127.0.0.1:5000/subSuccess",
+            "/subSuccess",
             data
           );
           if (details) {

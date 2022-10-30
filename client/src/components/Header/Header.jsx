@@ -16,7 +16,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails } from "../../features/user/userActions";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = [];
 const settings = ["Logout"];
 
 
@@ -65,6 +65,7 @@ const Header = () => {
         }}
       >
         <Toolbar disableGutters>
+          <Link></Link>
           <FontDownloadIcon
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
             style={{ color: "black" }}
@@ -116,7 +117,7 @@ const Header = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
+              {pages?.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography style={{ color: "black" }} textAlign="center">
                     {page}
@@ -148,7 +149,7 @@ const Header = () => {
             VENTUR
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {pages?.map((page) => (
               <Button
                 style={{ color: "black" }}
                 key={page}
